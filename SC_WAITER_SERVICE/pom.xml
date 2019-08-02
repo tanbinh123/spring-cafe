@@ -3,30 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.6.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<artifactId>spring-cafe</artifactId>
+		<groupId>com.springbucks</groupId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.springbucks</groupId>
-	<artifactId>spring-cafe</artifactId>
+	<artifactId>sc-waiter-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>spring-cafe</name>
-	<description>SpringCafe is a fully-loaded micro-service coffee shop system built with SpringBoot and Spring Cloud</description>
-
-	<modules>
-		<module>SC_WAITER_SERVICE</module>
-		<module>SC_CUSTOMER_SERVICE</module>
-	</modules>
-
-	<properties>
-		<java.version>1.8</java.version>
-		<spring-boot.version>2.1.6.RELEASE</spring-boot.version>
-		<!-- use UTF-8 encoding -->
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+	<name>${project.artifactId}</name>
+	<description>Waiter service module</description>
+	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
@@ -48,6 +33,7 @@
 
 	<build>
 		<plugins>
+			<!-- Package as an executable jar -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
