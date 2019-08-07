@@ -1,4 +1,4 @@
-package com.springbucks.sc.customer.service;
+package com.springbucks.sc.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,0 +1,4 @@
+spring:
+  spplication:
+    name: sc-customer-service
+

@@ -1,0 +1,46 @@
+server:
+  port: 8081
+logging:
+  level:
+    org:
+      # 打开flyway执行日志
+      flywaydb: debug
+spring:
+  application:
+    name: ScWaiterServiceApplication
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: sa
+    password:
+    druid:
+      filters: config,stat,slf4j
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:file:./target/h2/testdb;AUTO_SERVER=TRUE;MODE=MySQL
+  h2:
+    console:
+      enabled: true
+  flyway:
+    # 指定flyway脚本位置
+    locations: classpath:/db/migration
+    baselineOnMigrate: true
+  cache:
+    redis:
+      cache-null-calues: false
+      time-to-live: 1200000ms
+      use-key-prefix: true
+  redis:
+    host: localhost
+    port: 6379
+    pass:
+    database: 0
+    lettuce:
+      pool:
+        max-active: 7
+        max-idle: 7
+        min-idle: 2
+        max-wait: -1ms
+        shutdown-timeout: 200ms
+mybatis:
+  type-handlers-package: com.springbucks.sc.waiter.handler
+  configuration:
+    map-underscore-to-camel-case: true
