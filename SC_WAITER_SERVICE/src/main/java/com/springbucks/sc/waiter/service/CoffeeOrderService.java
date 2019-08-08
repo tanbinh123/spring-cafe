@@ -28,7 +28,7 @@ public class CoffeeOrderService {
                 .items(new ArrayList<>(Arrays.asList(coffee)))
                 .state(OrderState.INIT)
                 .build();
-        if (coffeeOrderMapper.save(order) == 1) {
+        if (coffeeOrderMapper.insert(order) == 1) {
             log.info("New Order: {}", order);
             return order;
         } else {
@@ -42,7 +42,7 @@ public class CoffeeOrderService {
             return false;
         }
         order.setState(state);
-        coffeeOrderMapper.save(order);
+        coffeeOrderMapper.insert(order);
         log.info("Updated Order: {}", order);
         return true;
     }

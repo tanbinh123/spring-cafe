@@ -1,5 +1,5 @@
 package com.springbucks.sc.waiter.model;
 
 public enum OrderState {
-    INIT, PAID, BREWING, BREWED, TAKEN, CANCELLED
+    INIT, PAID, BREWING, BREWED, TAKEN, CANCELLED;
 }

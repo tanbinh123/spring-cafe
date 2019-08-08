@@ -28,7 +28,7 @@ public class CoffeeMapperTest {
 
     @Test
     public void test01Insert() {
-        log.info("======== Test01: testInsert =========");
+        log.info("======== Test01: Insert =========");
         List<Coffee> coffeeList = coffeeMapper.getAll();
         log.info("Initial number of coffee: " + coffeeList.size());
 
@@ -40,14 +40,12 @@ public class CoffeeMapperTest {
         for (Coffee c:coffeeList) {
             log.info("Inserted Coffee {}", c);
         }
-        TestCase.assertEquals(3, coffeeMapper.getAll().size());
+        TestCase.assertEquals(3, coffeeList.size());
     }
 
     @Test
     public void test02GetByName() {
-        log.info("======== Test02: testGetByName =========");
-        List<Coffee> coffeeList = coffeeMapper.getAll();
-        log.info("Initial number of coffee: " + coffeeList.size());
+        log.info("======== Test02: GetByName =========");
 
         Coffee coffee = coffeeMapper.getByName("Americano");
         TestCase.assertEquals("Americano", coffee.getName());
@@ -56,9 +54,7 @@ public class CoffeeMapperTest {
 
     @Test
     public void test03GetByNames() {
-        log.info("======== Test03: testGetByNames =========");
-        List<Coffee> coffeeList = coffeeMapper.getAll();
-        log.info("Initial number of coffee: " + coffeeList.size());
+        log.info("======== Test03: GetByNames =========");
 
         List<String> coffeeNameList = new ArrayList<>();
         coffeeNameList.add("Americano");
@@ -68,14 +64,18 @@ public class CoffeeMapperTest {
 
     @Test
     public void test04Delete() {
-        log.info("======== Test04: testDelete =========");
+        log.info("======== Test04: Delete =========");
         List<Coffee> coffeeList = coffeeMapper.getAll();
         log.info("Initial number of coffee: " + coffeeList.size());
-
-        coffeeList = coffeeMapper.getAll();
-        for (Coffee c:coffeeList) {
-            coffeeMapper.deleteById(c.getId());
+        if (!coffeeList.isEmpty()) {
+            List<String> coffeeNameList = new ArrayList<>();
+            coffeeNameList.add("Americano");
+            coffeeNameList.add("Mocha");
+            coffeeNameList.add("Latte");
+            for (Coffee c : coffeeMapper.getByNames(coffeeNameList)) {
+                coffeeMapper.deleteById(c.getId());
+            }
+            TestCase.assertEquals(0, coffeeMapper.getAll().size());
         }
-        TestCase.assertEquals(0, coffeeMapper.getAll().size());
     }
 }

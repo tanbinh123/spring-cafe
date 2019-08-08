@@ -1,8 +1,15 @@
 package com.springbucks.sc.waiter.mapper;
 
 import com.springbucks.sc.waiter.model.Coffee;
-import org.apache.ibatis.annotations.*;
-
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Delete;
 import java.util.List;
 
 @Mapper
@@ -22,11 +29,11 @@ public interface CoffeeMapper {
     })
     Coffee getById(@Param("id") Long id);
 
-    @Select("SELECT * FROM t_coffee WHERE name = #{name} ORDER BY create_time ASC LIMIT 1")
+    @Select("SELECT * FROM t_coffee WHERE name = #{name} ORDER BY id LIMIT 1")
     @ResultMap("coffeeResultMap")
     Coffee getByName(@Param("name") String name);
 
-    @Select("SELECT * FROM t_coffee WHERE name = #{name} ORDER BY create_time")
+    @Select("SELECT * FROM t_coffee WHERE name = #{name} ORDER BY id")
     @ResultMap("coffeeResultMap")
     List<Coffee> getAllByName(String name);
 
@@ -45,9 +52,6 @@ public interface CoffeeMapper {
     @ResultMap("coffeeResultMap")
     List<Coffee> getByNames(@Param("names") List<String> names);
 
-    @Delete({
-            "DELETE FROM t_coffee",
-            "WHERE id = #{id,jdbcType=BIGINT}"
-    })
+    @Delete("DELETE FROM t_coffee WHERE id = #{id,jdbcType=BIGINT}")
     int deleteById(Long id);
 }
