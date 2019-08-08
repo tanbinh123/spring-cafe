@@ -18,7 +18,7 @@ public class CoffeeService {
     @Autowired
     private CoffeeMapper coffeeMapper;
 
-    public Coffee save(String name, Money price) {
+    public Coffee saveCoffee(String name, Money price) {
         Coffee coffee = Coffee.builder().name(name).price(price).build();
         if (coffeeMapper.insert(coffee) == 1) {
             return coffee;
@@ -28,19 +28,15 @@ public class CoffeeService {
     }
 
     @Cacheable
-    public List<Coffee> getAll() {
+    public List<Coffee> getAllCoffee() {
         return coffeeMapper.getAll();
     }
 
-    public Coffee getById(Long id) {
+    public Coffee getCoffee(Long id) {
         return coffeeMapper.getById(id);
     }
 
-    public Coffee getByName(String name) {
-        return coffeeMapper.getByName(name);
-    }
-
-    public List<Coffee> getAllByName(String name) {
-        return coffeeMapper.getAllByName(name);
+    public List<Coffee> getCoffeeByName(List<String> names) {
+        return coffeeMapper.getByNames(names);
     }
 }

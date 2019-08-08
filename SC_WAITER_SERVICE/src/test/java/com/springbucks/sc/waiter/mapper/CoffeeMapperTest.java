@@ -5,35 +5,77 @@ import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
-import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ActiveProfiles("dev")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CoffeeMapperTest {
     @Autowired
     private CoffeeMapper coffeeMapper;
 
     @Test
-    public void testInsert() throws Exception {
+    public void test01Insert() {
+        log.info("======== Test01: testInsert =========");
+        List<Coffee> coffeeList = coffeeMapper.getAll();
+        log.info("Initial number of coffee: " + coffeeList.size());
+
         coffeeMapper.insert(Coffee.builder().name ("Americano").price(Money.of(CurrencyUnit.of("CNY"), 20.0)).build());
         coffeeMapper.insert(Coffee.builder().name ("Mocha").price(Money.of(CurrencyUnit.of("CNY"), 35.0)).build());
         coffeeMapper.insert(Coffee.builder().name ("Latte").price(Money.of(CurrencyUnit.of("CNY"), 28.0)).build());
-        List<Coffee> coffeeList = coffeeMapper.getAll();
+
+        coffeeList = coffeeMapper.getAll();
         for (Coffee c:coffeeList) {
-            log.info("========Coffee Record==========");
-            log.info(c.toString());
+            log.info("Inserted Coffee {}", c);
         }
         TestCase.assertEquals(3, coffeeMapper.getAll().size());
     }
 
+    @Test
+    public void test02GetByName() {
+        log.info("======== Test02: testGetByName =========");
+        List<Coffee> coffeeList = coffeeMapper.getAll();
+        log.info("Initial number of coffee: " + coffeeList.size());
+
+        Coffee coffee = coffeeMapper.getByName("Americano");
+        TestCase.assertEquals("Americano", coffee.getName());
+        TestCase.assertEquals(Money.of(CurrencyUnit.of("CNY"), 20.0), coffee.getPrice());
+    }
+
+    @Test
+    public void test03GetByNames() {
+        log.info("======== Test03: testGetByNames =========");
+        List<Coffee> coffeeList = coffeeMapper.getAll();
+        log.info("Initial number of coffee: " + coffeeList.size());
+
+        List<String> coffeeNameList = new ArrayList<>();
+        coffeeNameList.add("Americano");
+        coffeeNameList.add("Mocha");
+        TestCase.assertEquals(2, coffeeMapper.getByNames(coffeeNameList).size());
+    }
+
+    @Test
+    public void test04Delete() {
+        log.info("======== Test04: testDelete =========");
+        List<Coffee> coffeeList = coffeeMapper.getAll();
+        log.info("Initial number of coffee: " + coffeeList.size());
+
+        coffeeList = coffeeMapper.getAll();
+        for (Coffee c:coffeeList) {
+            coffeeMapper.deleteById(c.getId());
+        }
+        TestCase.assertEquals(0, coffeeMapper.getAll().size());
+    }
 }

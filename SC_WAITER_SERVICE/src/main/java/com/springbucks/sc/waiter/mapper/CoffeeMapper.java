@@ -13,20 +13,41 @@ public interface CoffeeMapper {
     int insert(Coffee coffee);
 
     @Select("SELECT * FROM t_coffee WHERE id = #{id}")
-    @Results({
-            @Result(id = true, column = "id", property = "id"),
-            @Result(column = "create_time", property = "createTime"),
-            // map-underscore-to-camel-case = true # is equivalent
-            // @Result(column = "update_time", property = "updateTime"),
+    @Results(id = "coffeeResultMap", value = {
+            @Result(property = "id", column = "id", id = true),
+            @Result(property = "createTime", column = "create_time"),
+            @Result(property = "updateTime", column = "update_time"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "price", column = "price")
     })
     Coffee getById(@Param("id") Long id);
 
     @Select("SELECT * FROM t_coffee WHERE name = #{name} ORDER BY create_time ASC LIMIT 1")
+    @ResultMap("coffeeResultMap")
     Coffee getByName(@Param("name") String name);
 
     @Select("SELECT * FROM t_coffee WHERE name = #{name} ORDER BY create_time")
-    public List<Coffee> getAllByName(String name);
+    @ResultMap("coffeeResultMap")
+    List<Coffee> getAllByName(String name);
 
-    @Select("select * from t_coffee order by id")
+    @Select("SELECT * FROM t_coffee ORDER BY id")
+    @ResultMap("coffeeResultMap")
     List<Coffee> getAll();
+
+    @Select({
+            "<script> ",
+                "SELECT * FROM t_coffee c WHERE c.name in",
+                    "<foreach collection='names' item='name' open='(' separator=',' close=')'>",
+                    "#{name}",
+                    "</foreach>",
+            "</script>"
+    })
+    @ResultMap("coffeeResultMap")
+    List<Coffee> getByNames(@Param("names") List<String> names);
+
+    @Delete({
+            "DELETE FROM t_coffee",
+            "WHERE id = #{id,jdbcType=BIGINT}"
+    })
+    int deleteById(Long id);
 }

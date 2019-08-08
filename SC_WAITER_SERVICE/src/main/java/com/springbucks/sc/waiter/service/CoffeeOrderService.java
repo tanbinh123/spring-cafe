@@ -18,7 +18,7 @@ public class CoffeeOrderService {
     @Autowired
     private CoffeeOrderMapper coffeeOrderMapper;
 
-    public CoffeeOrder getById(Long id) {
+    public CoffeeOrder getOrder(Long id) {
         return coffeeOrderMapper.getById(id);
     }
 
