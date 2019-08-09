@@ -78,6 +78,7 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 			<version>5.2.4</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.github.database-rider</groupId>
@@ -89,7 +90,7 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.4.197</version>
-			<scope>test</scope>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
@@ -107,25 +108,25 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-maven-plugin</artifactId>
-				<version>5.2.4</version>
-				<configuration>
-					<url>jdbc:h2:file:./target/h2/testdb</url>
-					<user>sa</user>
-					<locations>
-						<location>classpath:db/migration</location>
-					</locations>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>com.h2database</groupId>
-						<artifactId>h2</artifactId>
-						<version>1.4.197</version>
-					</dependency>
-				</dependencies>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.flywaydb</groupId>-->
+<!--				<artifactId>flyway-maven-plugin</artifactId>-->
+<!--				<version>5.2.4</version>-->
+<!--				<configuration>-->
+<!--					<url>jdbc:h2:mem:testdb;MODE=MySQL</url>-->
+<!--					<user>sa</user>-->
+<!--					<locations>-->
+<!--						<location>classpath:db/migration</location>-->
+<!--					</locations>-->
+<!--				</configuration>-->
+<!--				<dependencies>-->
+<!--					<dependency>-->
+<!--						<groupId>com.h2database</groupId>-->
+<!--						<artifactId>h2</artifactId>-->
+<!--						<version>1.4.197</version>-->
+<!--					</dependency>-->
+<!--				</dependencies>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 

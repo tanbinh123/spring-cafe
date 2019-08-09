@@ -21,6 +21,4 @@ public class ScWaiterServiceApplication implements WebMvcConfigurer {
 		registry.addInterceptor(new PerformanceInteceptor())
 				.addPathPatterns("/coffee/**").addPathPatterns("/order/**");
 	}
-
-
 }

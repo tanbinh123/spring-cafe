@@ -32,9 +32,13 @@ public class CoffeeService {
         return coffeeMapper.getAll();
     }
 
-    public Coffee getCoffee(Long id) {
+    public Coffee getCoffeeById(Long id) {
         return coffeeMapper.getById(id);
     }
+
+    public Coffee getOneCoffeeByName(String name) { return coffeeMapper.getOneByName(name); }
+
+    public List<Coffee> getAllCoffeeByName(String name) { return coffeeMapper.getAllByName(name); }
 
     public List<Coffee> getCoffeeByName(List<String> names) {
         return coffeeMapper.getByNames(names);

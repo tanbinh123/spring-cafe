@@ -74,9 +74,14 @@ public class CoffeeController {
     }
 
     @GetMapping("/{id}")
-    public Coffee getById(@PathVariable Long id) {
-        Coffee coffee = coffeeService.getCoffee(id);
+    public Coffee getById(@PathVariable("id") Long id) {
+        Coffee coffee = coffeeService.getCoffeeById(id);
         log.info("Coffee {}:", coffee);
         return coffee;
+    }
+
+    @GetMapping("/")
+    public List<Coffee> getByName(@RequestParam("name") String name) {
+        return coffeeService.getAllCoffeeByName(name);
     }
 }

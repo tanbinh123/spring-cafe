@@ -31,11 +31,11 @@ public interface CoffeeMapper {
 
     @Select("SELECT * FROM t_coffee WHERE name = #{name} ORDER BY id LIMIT 1")
     @ResultMap("coffeeResultMap")
-    Coffee getByName(@Param("name") String name);
+    Coffee getOneByName(@Param("name") String name);
 
     @Select("SELECT * FROM t_coffee WHERE name = #{name} ORDER BY id")
     @ResultMap("coffeeResultMap")
-    List<Coffee> getAllByName(String name);
+    List<Coffee> getAllByName(@Param("name") String name);
 
     @Select("SELECT * FROM t_coffee ORDER BY id")
     @ResultMap("coffeeResultMap")
