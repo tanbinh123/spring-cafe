@@ -47,7 +47,7 @@ public class CoffeeMapperTest {
     public void test02GetByName() {
         log.info("======== Test02: GetByName =========");
 
-        Coffee coffee = coffeeMapper.getByName("Americano");
+        Coffee coffee = coffeeMapper.getOneByName("Americano");
         TestCase.assertEquals("Americano", coffee.getName());
         TestCase.assertEquals(Money.of(CurrencyUnit.of("CNY"), 20.0), coffee.getPrice());
     }
