@@ -1,28 +1,30 @@
 server:
   port: 8081
-logging:
-  level:
-    org:
-      # 打开flyway执行日志
-      flywaydb: debug
+
 spring:
+  output:
+    ansi:
+      enabled=ALWAYS:
   application:
     name: ScWaiterServiceApplication
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:h2:mem:testdb;MODE=MySQL
     username: sa
     password:
+    type: com.alibaba.druid.pool.DruidDataSource
     druid:
       filters: config,stat,slf4j
       driver-class-name: org.h2.Driver
-      url: jdbc:h2:file:./target/h2/testdb;AUTO_SERVER=TRUE;MODE=MySQL
+      initial-size: 5
+      max-active: 5
+      min-idle: 5
+      test-on-borrow: true
+      test-on-return: true
+      test-while-idle: true
+      validationQuery: select 1
   h2:
     console:
       enabled: true
-  flyway:
-    # 指定flyway脚本位置
-    locations: classpath:/db/migration
-    baselineOnMigrate: true
   cache:
     redis:
       cache-null-calues: false
@@ -40,6 +42,7 @@ spring:
         min-idle: 2
         max-wait: -1ms
         shutdown-timeout: 200ms
+
 mybatis:
   type-handlers-package: com.springbucks.sc.waiter.handler
   configuration:
