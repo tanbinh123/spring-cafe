@@ -1,0 +1,6 @@
+spring:
+  spplication:
+    name: sc-customer-service
+
+server:
+  port: 8082

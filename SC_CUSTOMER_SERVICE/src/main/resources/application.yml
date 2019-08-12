@@ -1,4 +1,3 @@
 spring:
-  spplication:
-    name: sc-customer-service
-
+  profiles:
+    active: dev
