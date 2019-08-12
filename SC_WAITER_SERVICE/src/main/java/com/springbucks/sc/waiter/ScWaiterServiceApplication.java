@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 @SpringBootApplication
 @MapperScan("com.springbucks.sc.waiter.mapper")
-@EnableCaching
+//@EnableCaching
 public class ScWaiterServiceApplication implements WebMvcConfigurer {
 	public static void main(String[] args) {
 		SpringApplication.run(ScWaiterServiceApplication.class, args);

@@ -27,7 +27,7 @@ public class CoffeeService {
         }
     }
 
-    @Cacheable
+//    @Cacheable
     public List<Coffee> getAllCoffee() {
         return coffeeMapper.getAll();
     }
@@ -43,4 +43,6 @@ public class CoffeeService {
     public List<Coffee> getCoffeeByName(List<String> names) {
         return coffeeMapper.getByNames(names);
     }
+
+    public int getCoffeeCount() { return coffeeMapper.getCount(); }
 }

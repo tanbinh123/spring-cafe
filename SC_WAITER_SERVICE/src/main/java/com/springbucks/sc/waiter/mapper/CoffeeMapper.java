@@ -41,6 +41,9 @@ public interface CoffeeMapper {
     @ResultMap("coffeeResultMap")
     List<Coffee> getAll();
 
+    @Select("SELECT COUNT(*) FROM t_coffee")
+    int getCount();
+
     @Select({
             "<script> ",
                 "SELECT * FROM t_coffee c WHERE c.name in",
@@ -53,5 +56,5 @@ public interface CoffeeMapper {
     List<Coffee> getByNames(@Param("names") List<String> names);
 
     @Delete("DELETE FROM t_coffee WHERE id = #{id,jdbcType=BIGINT}")
-    int deleteById(Long id);
+    int deleteById(@Param("id") Long id);
 }
