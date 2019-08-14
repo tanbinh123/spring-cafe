@@ -1,9 +1,6 @@
 server:
   port: 8081
 management:
-  endpoints:
-    web:
-      base-path: /manage
   endpoint:
     health:
       show-details: always
@@ -48,6 +45,14 @@ spring:
         min-idle: 2
         max-wait: -1ms
         shutdown-timeout: 200ms
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+        prefer-ip-address: true
 
 mybatis:
   type-handlers-package: com.springbucks.sc.waiter.handler
